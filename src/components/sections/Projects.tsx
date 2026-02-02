@@ -171,7 +171,7 @@ const Projects: React.FC = () => {
                   </div>
 
                   <div className="flex gap-4 mt-auto">
-                    <Button
+                    <Button onClick={() => window.open(project.githubKey,"_blank")}
                       variant="outline"
                       size="sm"
                       className="w-full"
@@ -180,7 +180,7 @@ const Projects: React.FC = () => {
                       <Github className="w-4 h-4 mr-2" aria-hidden="true" />{" "}
                       Code
                     </Button>
-                    <Button
+                    <Button onClick={() => window.open(project.liveKey, "_blank")}
                       variant="ghost"
                       size="sm"
                       className="w-full"
