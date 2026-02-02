@@ -31,7 +31,7 @@ const PROJECTS_DATA: readonly Project[] = [
     category: "MERN",
     description:
       "A smart period tracking application with AI-powered insights and personalized recommendations.",
-    image: "/src/assets/Rectangle 22 (1).png",
+    image: "src/assets/assets/careher.png",
     tech: ["MongoDB", "Express", "React", "Node.js"],
     githubKey: "https://github.com/kvn2004/MERN_full_project.git",
     liveKey: "https://care-her.vercel.app/login",
@@ -41,7 +41,7 @@ const PROJECTS_DATA: readonly Project[] = [
     category: "Spring Boot",
     description:
       "A comprehensive management system for tuition classes, handling student enrollments, batch scheduling, fee tracking, and online payments.",
-    image: "/src/assets/Rectangle 22 (2).png",
+    image: "src/assets/assets/classphere.png",
     tech: ["Spring Boot", "MySQL", "HTML", "CSS", "JS"],
     githubKey: "https://github.com/kvn2004/CLASS-SPHERE.git",
     liveKey: "#",
@@ -51,7 +51,7 @@ const PROJECTS_DATA: readonly Project[] = [
     category: "Flutter",
     description:
       "A comprehensive management system for tuition classes, handling student enrollments, batch scheduling, fee tracking, and online payments.",
-    image: "/src/assets/Rectangle 22 (2).png",
+    image: "src/assets/assets/weatherapp.png",
     tech: ["Flutter", "Dart", "API"],
     githubKey: "https://github.com/kvn2004/WeatherApp.git",
     liveKey: "#",

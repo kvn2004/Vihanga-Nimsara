@@ -128,10 +128,10 @@ const Hero: React.FC = () => {
               <span className="text-3xl font-bold text-white">5+</span>
               <span className="text-sm text-muted">Projects Completed</span>
             </div>
-            <div className="flex flex-col">
-              <span className="text-3xl font-bold text-white">2+</span>
+            {/* <div className="flex flex-col">
+              <span className="text-3xl font-bold text-white">1+</span>
               <span className="text-sm text-muted">Years Experience</span>
-            </div>
+            </div> */}
           </div>
         </motion.div>
 
