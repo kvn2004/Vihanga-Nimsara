@@ -17,7 +17,7 @@ const About: React.FC = () => {
              {/* Using Group 50.svg from assets */}
             <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
                  <img 
-                    src="src\assets\assets\Group 50.svg" 
+                    src="public\assets\Group 50.svg" 
                     alt="About Me Illustration" 
                     className="w-full h-full object-contain drop-shadow-2xl"
                  />
