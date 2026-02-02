@@ -147,7 +147,7 @@ const Hero: React.FC = () => {
 
           <div className="relative w-[350px] h-[350px] md:w-[450px] md:h-[450px] backdrop-blur-sm">
             <img
-              src="public\assets\Group 46.png"
+              src="\assets\Group 46.png"
               alt="Vihanga Nimsara"
               className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
               onError={(e) => {
