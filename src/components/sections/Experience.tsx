@@ -2,7 +2,7 @@ import React from 'react';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase, School2, SchoolIcon } from 'lucide-react';
+import { GraduationCap, Briefcase, SchoolIcon } from 'lucide-react';
 
 const experiences = [
     {
