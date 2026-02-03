@@ -118,9 +118,11 @@ const Hero: React.FC = () => {
             >
               Contact Me <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
+            <a href="\Vihanga_Nimsara_FullStack_Backend_Intern_CV.pdf" download>
             <Button variant="outline" size="lg">
               Download CV <Download className="ml-2 w-5 h-5" />
             </Button>
+            </a>
           </div>
 
           <div className="mt-12 flex gap-8">

@@ -8,7 +8,7 @@ const experiences = [
     {
         year: "2024 - Present",
         title: "Computer Science Student",
-        company: "IJSE - Institute of Software Engineering",
+        company: "University of Bolton, UK ",
         description: "Pursuing a degree in Computer Science, focusing on Software Engineering, Data Structures, and Algorithms.",
         icon: GraduationCap
     },
