@@ -3,7 +3,16 @@ import { Section } from "../ui/Section";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/Button";
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Facebook, MessageSquare } from "lucide-react";
+import {
+  Mail,
+  Github,
+  Linkedin,
+  Facebook,
+  MessageSquare,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 interface FormData {
   name: string;
@@ -11,6 +20,8 @@ interface FormData {
   subject: string;
   message: string;
 }
+
+type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 const SOCIAL_LINKS = [
   {
@@ -33,6 +44,12 @@ const SOCIAL_LINKS = [
   },
 ] as const;
 
+// EmailJS Configuration
+// TODO: Replace these with your actual EmailJS credentials from https://www.emailjs.com/
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -40,6 +57,9 @@ const Contact: React.FC = () => {
     subject: "",
     message: "",
   });
+
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -50,10 +70,56 @@ const Contact: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault();
-      // TODO: Implement form submission logic
-      console.log("Form submitted:", formData);
+      setSubmitStatus("loading");
+      setErrorMessage("");
+
+      try {
+        // Send email using EmailJS
+        const templateParams = {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject || "New Contact Form Submission",
+          message: formData.message,
+          to_name: "Vihanga Nimsara", // Your name
+        };
+
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          templateParams,
+          EMAILJS_PUBLIC_KEY,
+        );
+
+        setSubmitStatus("success");
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus("idle");
+        }, 5000);
+      } catch (error) {
+        console.error("Failed to send email:", error);
+        setSubmitStatus("error");
+        setErrorMessage(
+          error instanceof Error
+            ? error.message
+            : "Failed to send message. Please try again or contact me directly via email.",
+        );
+
+        // Reset error message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus("idle");
+          setErrorMessage("");
+        }, 5000);
+      }
     },
     [formData],
   );
@@ -205,8 +271,44 @@ const Contact: React.FC = () => {
                   aria-required="true"
                 ></textarea>
               </div>
-              <Button type="submit" className="w-full" size="lg">
-                Send Message
+
+              {/* Success Message */}
+              {submitStatus === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-500"
+                >
+                  <CheckCircle size={20} aria-hidden="true" />
+                  <p className="text-sm font-medium">
+                    Message sent successfully! I'll get back to you soon.
+                  </p>
+                </motion.div>
+              )}
+
+              {/* Error Message */}
+              {submitStatus === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-start gap-2 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500"
+                >
+                  <AlertCircle
+                    size={20}
+                    className="mt-0.5 flex-shrink-0"
+                    aria-hidden="true"
+                  />
+                  <p className="text-sm font-medium">{errorMessage}</p>
+                </motion.div>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full"
+                size="lg"
+                disabled={submitStatus === "loading"}
+              >
+                {submitStatus === "loading" ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>
